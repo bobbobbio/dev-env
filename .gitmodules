@@ -1,0 +1,12 @@
+[submodule "themes/catppuccin/vim"]
+	path = themes/catppuccin/vim
+	url = https://github.com/catppuccin/vim.git
+[submodule "fish-shell"]
+	path = fish-shell
+	url = https://github.com/fish-shell/fish-shell.git
+[submodule "tmux"]
+	path = tmux
+	url = https://github.com/tmux/tmux.git
+[submodule "vim"]
+	path = vim
+	url = https://github.com/vim/vim.git
