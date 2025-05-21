@@ -1,52 +1,77 @@
 #!/bin/bash
 set -ex
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+if ! test -f ~/.cargo/bin/rustc; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
 
 sudo apt install -y \
+    automake \
     build-essential \
     toilet \
     cmake \
-    gh
+    gh \
+    libevent-dev
 
 # install fish
-pushd fish-shell
+if ! test -f /usr/local/bin/fish; then
+    pushd fish-shell
 
-mkdir build
-pushd build
+    mkdir build
+    pushd build
 
-cmake ..
-cmake --build .
-sudo cmake --install .
+    cmake ..
+    cmake --build .
+    sudo cmake --install .
 
-popd # build
-popd # fish-shell
+    popd # build
+    popd # fish-shell
+
+    mkdir -p ~/.config
+    cp -r .config/fish ~/.config/
+
+    sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
+    chsh --shell /usr/local/bin/fish
+fi
 
 # install tmux
-pushd tmux
+if ! test -f /usr/local/bin/tmux; then
+    pushd tmux
 
-sh autogen.sh
-./configure
-make -j12
-sudo make install
+    sh autogen.sh
+    ./configure
+    make -j12
+    sudo make install
 
-popd # tmux
+    popd # tmux
 
-cp .tmux.conf ~/
+    cp .tmux.conf ~/
+fi
 
 # install vim
-pushd vim
-./configure --with-features=huge --enable-pythoninterp
-make -j12
-sudo make install
+if ! test -f /usr/local/bin/vim; then
+    pushd vim
+    ./configure --with-features=huge --enable-pythoninterp
+    make -j12
+    sudo make install
 
-popd # vim
+    popd # vim
 
-cp .vimrc ~/
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
+    cp .vimrc ~/
+    mkdir -p ~/.vim
+    cp -r themes/catppuccin/vim/colors ~/.vim/
+
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim +PluginInstall +qall
+
+    cp -r themes/catppuccin/vim/autoload/lightline/colorscheme ~/.vim/bundle/lightline.vim/autoload/lightline/
+fi
+
+
 
 # other utilities
 cargo install cargo-binstall
 
-cargo binstall ripgrep yazi
+cargo binstall ripgrep
+
+# todo: yazi
