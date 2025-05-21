@@ -20,3 +20,8 @@ sudo cmake --install .
 # install tmux
 
 # install vim
+
+# other utilities
+cargo install cargo-binstall
+
+cargo binstall ripgrep yazi
