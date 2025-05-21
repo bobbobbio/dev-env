@@ -29,6 +29,7 @@ if ! test -f /usr/local/bin/fish; then
 
     mkdir -p ~/.config
     cp -r .config/fish ~/.config/
+    cp -r themes/catppuccin/fish/themes ~/.config/fish/
 
     sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
     chsh --shell /usr/local/bin/fish
