@@ -13,3 +13,6 @@
 [submodule "themes/catppuccin/fish"]
 	path = themes/catppuccin/fish
 	url = https://github.com/catppuccin/fish.git
+[submodule "yazi"]
+	path = yazi
+	url = https://github.com/sxyazi/yazi.git

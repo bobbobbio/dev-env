@@ -15,6 +15,8 @@ sudo apt install -y \
 
 # install fish
 if ! test -f /usr/local/bin/fish; then
+    echo "installing fish"
+
     pushd fish-shell
 
     mkdir build
@@ -37,6 +39,8 @@ fi
 
 # install tmux
 if ! test -f /usr/local/bin/tmux; then
+    echo "installing tmux"
+
     pushd tmux
 
     sh autogen.sh
@@ -51,6 +55,8 @@ fi
 
 # install vim
 if ! test -f /usr/local/bin/vim; then
+    echo "installing vim"
+
     pushd vim
     ./configure --with-features=huge --enable-pythoninterp
     make -j12
@@ -70,9 +76,20 @@ fi
 
 
 
-# other utilities
-cargo install cargo-binstall
+if ! test -f ~/.cargo/bin/cargo-binstall; then
+    echo "installing cargo-binstall"
+    cargo install cargo-binstall
+fi
 
-cargo binstall ripgrep
+if ! test -f ~/.cargo/bin/rg; then
+    echo "installing ripgrep"
+    cargo binstall -y ripgrep
+fi
 
-# todo: yazi
+if ! test -f ~/.cargo/bin/yazi; then
+    echo "installing yazi"
+    pushd yazi
+    cargo build --release --locked
+    install target/release/yazi ~/.cargo/bin/yazi
+    popd
+fi
