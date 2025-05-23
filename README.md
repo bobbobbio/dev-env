@@ -13,3 +13,4 @@ cd dev-env
 - [yazi](https://github.com/sxyazi/yazi)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - dotfiles for various things
+- [catppuccin theme](https://catppuccin.com/)
