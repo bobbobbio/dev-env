@@ -11,3 +11,5 @@ cd dev-env
 - [vim](https://www.vim.org/)
 - [Rust](https://www.rust-lang.org/)
 - [yazi](https://github.com/sxyazi/yazi)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- dotfiles for various things
